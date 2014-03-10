@@ -7,7 +7,7 @@ date_default_timezone_set('Asia/Tokyo');
 
 # ERROR HANDLER
 function runtime_error_handler($errno, $errstr, $errfile, $errline, $errcontext) {
-  echo "RUNTIME ERROR $errfile:$errline:$errstr";
+  echo "RUNTIME ERROR $errfile:$errline:$errstr\n";
   die;
 }
 set_error_handler('runtime_error_handler');
