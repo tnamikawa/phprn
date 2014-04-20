@@ -394,4 +394,44 @@ class Files {
   }
 }
 
+function is_hasharray($target) {
+  if (! is_array($target)) { return false; }
+  if (! count($target)) { return true; }
+  return ! is_plainarray($target);
+}
+
+function is_plainarray($target) {
+  if (! is_array($target)) { return false; }
+  if (! count($target)) { return true; }
+
+  $keys = array_keys($target);
+  $keys2 = array_unique($keys);
+  sort($keys2);
+  if (0 === $keys[0] &&
+  0 === $keys2[0] &&
+  count($keys) - 1 === $keys[count($keys) - 1] &&
+  count($keys) - 1 === $keys2[count($keys2) - 1]
+  ) {
+    return true;
+  }
+  return false;
+}
+
+function is_word($target) {
+  if (is_string($target) && preg_match('/^[a-zA-Z]\w*$/', $target)) {
+    return true;
+  }
+  return false;
+}
+
+function mysql_fetch_all($result) {
+  assert(is_resource($result));
+  $ret = array();
+  $rows = mysql_num_rows($result);
+  for ($i = 0; $i < $rows; $i++) {
+    array_push($ret, mysql_fetch_assoc($result));
+  }
+  return $ret;
+}
+
 
